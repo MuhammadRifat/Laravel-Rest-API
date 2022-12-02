@@ -20,6 +20,21 @@ class PostController extends Controller
         ]);
     }
 
+    public function show(Post $post)
+    {
+        if ($post) {
+            return response()->json([
+                'status' => true,
+                'data' => $post,
+                'message' => 'Successfully Loaded'
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => 'Not found'
+        ]);
+    }
+
     // create a post
     public function store(PostsRequest $request)
     {
@@ -40,7 +55,6 @@ class PostController extends Controller
         return response()->json([
             'status' => true,
             'data' => $post,
-            'user' => Auth::user(),
             'message' => 'Successfully Updated'
         ]);
     }
