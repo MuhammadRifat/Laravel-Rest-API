@@ -21,7 +21,7 @@ class CheckAdmin
             return response()->json([
                 'status' => false,
                 'message' => 'You are not allowed to access this section'
-            ]);
+            ], 403);
         }
         return $next($request);
     }
