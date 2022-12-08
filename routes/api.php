@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
-Route::apiResource('posts', PostController::class)->middleware(['auth:sanctum', 'admin_check']);
+Route::apiResource('posts', PostController::class)->middleware(['auth:sanctum', 'admin']);
+Route::apiResource('users', UserController::class)->middleware(['auth:sanctum', 'admin']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->get('/me', function () {
+    return Auth::user();
 });

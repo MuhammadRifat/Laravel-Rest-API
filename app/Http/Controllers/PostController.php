@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Http\Requests\PostsRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -13,26 +14,16 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return response()->json([
-            'status' => true,
-            'data' => $posts,
-            'message' => 'Successfully loaded'
-        ]);
+        return Helper::response_success(true, $posts, 'Successfully Loaded');
     }
 
+    // get individual posts by id
     public function show(Post $post)
     {
         if ($post) {
-            return response()->json([
-                'status' => true,
-                'data' => $post,
-                'message' => 'Successfully Loaded'
-            ]);
+            return Helper::response_success(true, $post, 'Successfully Loaded');
         }
-        return response()->json([
-            'status' => false,
-            'message' => 'Not found'
-        ]);
+        return Helper::response_error('Not found', 404);
     }
 
     // create a post
@@ -40,11 +31,7 @@ class PostController extends Controller
     {
         $post = Post::create($request->all());
 
-        return response()->json([
-            'status' => true,
-            'data' => $post,
-            'message' => 'Successfully created'
-        ]);
+        return Helper::response_success(true, $post, 'Successfully created');
     }
 
     // update a post
@@ -52,11 +39,7 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
-        return response()->json([
-            'status' => true,
-            'data' => $post,
-            'message' => 'Successfully Updated'
-        ]);
+        return Helper::response_success(true, $post, 'Successfully Updated');
     }
 
     // delete a post
@@ -64,10 +47,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return response()->json([
-            'status' => true,
-            'data' => $post,
-            'message' => 'Successfully Deleted'
-        ]);
+        return Helper::response_success(true, $post, 'Successfully Deleted');
     }
 }
