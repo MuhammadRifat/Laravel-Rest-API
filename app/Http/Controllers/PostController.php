@@ -14,14 +14,14 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return Helper::response_success(true, $posts, 'Successfully Loaded');
+        return Helper::response_success($posts, 'Successfully Loaded');
     }
 
     // get individual posts by id
     public function show(Post $post)
     {
         if ($post) {
-            return Helper::response_success(true, $post, 'Successfully Loaded');
+            return Helper::response_success($post, 'Successfully Loaded');
         }
         return Helper::response_error('Not found', 404);
     }
@@ -31,7 +31,7 @@ class PostController extends Controller
     {
         $post = Post::create($request->all());
 
-        return Helper::response_success(true, $post, 'Successfully created');
+        return Helper::response_success($post, 'Successfully created');
     }
 
     // update a post
@@ -39,7 +39,7 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
-        return Helper::response_success(true, $post, 'Successfully Updated');
+        return Helper::response_success($post, 'Successfully Updated');
     }
 
     // delete a post
@@ -47,6 +47,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return Helper::response_success(true, $post, 'Successfully Deleted');
+        return Helper::response_success($post, 'Successfully Deleted');
     }
 }

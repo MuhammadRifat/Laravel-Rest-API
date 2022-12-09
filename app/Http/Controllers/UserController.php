@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $users = User::where('id', '!=', Auth::id())->get();
 
-        return Helper::response_success(true, $users, 'Successfully loaded');
+        return Helper::response_success($users, 'Successfully loaded');
     }
 
     // get individual user by id
@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         if ($user) {
 
-            return Helper::response_success(true, $user, 'Successfully loaded');
+            return Helper::response_success($user, 'Successfully loaded');
         }
 
         return Helper::response_error('Not found', 404);
@@ -33,6 +33,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return Helper::response_success(true, $user, 'Successfully Deleted');
+        return Helper::response_success($user, 'Successfully Deleted');
     }
 }

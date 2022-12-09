@@ -4,10 +4,10 @@ namespace App\Helper;
 
 class Helper
 {
-    public static function response_success($status = false, $data = null, $message = '')
+    public static function response_success($data = null, $message = '')
     {
         return response()->json([
-            'status' => $status,
+            'status' => true,
             'data' => $data,
             'message' => $message
         ]);
